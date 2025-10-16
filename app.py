@@ -7,9 +7,12 @@ from flask import Flask, jsonify, Response, url_for
 app = Flask(__name__)
 
 # --- EDITA este diccionario con tus IDs reales (los que ves en /sys/bus/w1/devices/)
+# Añade todos los sensores que tengas y añade el mismo nombre que las ids de la página HTML
 SENSOR_MAP = {
-    "28-000000b1aff0": "Evaporador",
-    "28-00000bbbbbbb": "Succion",
+    "28-000000b1aff0": "evaporador-entrada",
+    "28-00000bbbbbbb": "evaporador-entrada",
+    "28-00000ccccccc": "Descarga",
+    "28-00000ddddddd": "Liquido",
     "28-00000ccccccc": "Descarga",
     "28-00000ddddddd": "Liquido"
 }
@@ -149,14 +152,14 @@ def index():
         <p>Actualiza cada 2 segundos.</p>
         <section id="fridge">
             <img src="/static/esquema.webp" alt="" width="400" height="300">
-            <div id="evaporador-entrada">12ºC</div>
-            <div id="evaporador-salida">12ºC</div>
-            <div id="compresor-entrada">12ºC</div>
-            <div id="compresor-salida">12ºC</div>
-            <div id="condensador-entrada">50ºC</div>
-            <div id="condensador-salida">50ºC</div>
-            <div id="temperatura-ambiente">50ºC</div>
-            <div id="temperatura-camara">50ºC</div>
+            <div id="evaporador-entrada">-- ºC</div>
+            <div id="evaporador-salida">-- ºC</div>
+            <div id="compresor-entrada">-- ºC</div>
+            <div id="compresor-salida">-- ºC</div>
+            <div id="condensador-entrada">-- ºC</div>
+            <div id="condensador-salida">-- ºC</div>
+            <div id="temperatura-ambiente">-- ºC</div>
+            <div id="temperatura-camara">-- ºC</div>
         </section>
     </section>
 
