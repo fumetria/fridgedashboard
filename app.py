@@ -9,12 +9,14 @@ app = Flask(__name__)
 # --- EDITA este diccionario con tus IDs reales (los que ves en /sys/bus/w1/devices/)
 # Añade todos los sensores que tengas y añade el mismo nombre que las ids de la página HTML
 SENSOR_MAP = {
-    "28-000000b1aff0": "evaporador-entrada",
-    "28-00000bbbbbbb": "evaporador-entrada",
-    "28-00000ccccccc": "Descarga",
-    "28-00000ddddddd": "Liquido",
-    "28-00000ccccccc": "Descarga",
-    "28-00000ddddddd": "Liquido"
+    "28-000000b19d26": "evaporador-entrada",
+    "28-000000bla98c": "evaporador-salida",
+    "28-000000b20b6b": "compresor-entrada",
+    "28-000000b22d0b": "compresor-salida",
+    "28-000000b22ef2": "condensador-entrada",
+    "28-000000b24aac": "condensador-salida",
+    "28-000000b23c95": "temperatura-ambiente",
+    "28-000000b24fab": "temperatura-camara"
 }
 BASE_DIR = '/sys/bus/w1/devices/'
 
