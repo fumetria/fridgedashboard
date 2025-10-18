@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Añade todos los sensores que tengas y añade el mismo nombre que las ids de la página HTML
 SENSOR_MAP = {
     "28-000000b19d26": "evaporador-entrada",
-    "28-000000bla98c": "evaporador-salida",
+    "28-000000b1a98c": "evaporador-salida",
     "28-000000b20b6b": "compresor-entrada",
     "28-000000b22d0b": "compresor-salida",
     "28-000000b22ef2": "condensador-entrada",
@@ -180,7 +180,7 @@ def index():
                 for (const key in data) {
                     const el = document.getElementById(key);
                     if (el) {
-                        const t = data[key] === null ? '--' : (data[key].toFixed(2) + ' °C');
+                        const t = data[key] === null ? '--' : (data[key].toFixed(2) + '°C');
                         el.textContent = t;
                     }
                 }
