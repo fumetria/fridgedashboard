@@ -15,7 +15,7 @@ SENSOR_MAP = {
     "28-000000b22d0b": "compresor-salida",
     "28-000000b22ef2": "condensador-entrada",
     "28-000000b24aac": "condensador-salida",
-    "28-000000b23c95": "temperatura-ambiente",
+    "28-000000b24c95": "temperatura-ambiente",
     "28-000000b24fab": "temperatura-camara"
 }
 BASE_DIR = '/sys/bus/w1/devices/'
@@ -56,25 +56,13 @@ def index():
     <title>Ciclo frigorífico - temperaturas</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-family: Arial, sans-serif;
             padding: 20px;
             background-color: grey;
             height: 100dvh;
-        }
-
-        svg {
-            width: 700px;
-            max-width: 100%;
-            border: 1px solid #ddd;
-        }
-
-        .node {
-            font-size: 14px;
-            text-anchor: middle;
-        }
-
-        .temp {
-            font-weight: bold;
         }
 
         #app {
@@ -87,14 +75,13 @@ def index():
             height: 300px;
             position: relative;
             border: 1px solid;
-            /* background-image: url("esquema.webp"); */
         }
 
         #evaporador-salida {
             position: absolute;
             top: 16%;
             right: 28%;
-            font-size: 30px;
+            font-size: 26px;
             color: blue;
         }
 
@@ -102,7 +89,7 @@ def index():
             position: absolute;
             top: 16%;
             left: 20%;
-            font-size: 30px;
+            font-size: 26px;
             color: blue;
         }
 
@@ -110,7 +97,7 @@ def index():
             position: absolute;
             top: 30%;
             right: 15%;
-            font-size: 30px;
+            font-size: 26px;
             color: blue;
         }
 
@@ -118,7 +105,7 @@ def index():
             position: absolute;
             top: 60%;
             left: 70%;
-            font-size: 30px;
+            font-size: 26px;
             color: red;
         }
 
@@ -126,7 +113,7 @@ def index():
             position: absolute;
             top: 80%;
             right: 25%;
-            font-size: 30px;
+            font-size: 26px;
             color: red;
         }
 
@@ -134,16 +121,32 @@ def index():
             position: absolute;
             top: 80%;
             left: 20%;
-            font-size: 30px;
+            font-size: 26px;
             color: red;
         }
 
-        #temperatura-ambiente {
+        #temperatura-camara {
             position: absolute;
             top: 48%;
             left: 38%;
-            font-size: 30px;
+            font-size: 26px;
             color: green;
+        }
+
+        #temperatura-ambiente {
+            color: green;
+        }
+
+        #outdoor {
+            border: 1px solid;
+            padding: 0.5rem 2rem;
+
+            & p,
+            #temperatura-ambiente {
+                text-align: center;
+                font-weight: 700;
+                font-size: 26px;
+            }
         }
     </style>
 </head>
@@ -152,16 +155,19 @@ def index():
     <section id="app">
         <h2>Ciclo frigorífico — temperaturas</h2>
         <p>Actualiza cada 2 segundos.</p>
-        <section id="fridge">
-            <img src="/static/esquema.webp" alt="" width="400" height="300">
-            <div id="evaporador-entrada">-- ºC</div>
-            <div id="evaporador-salida">-- ºC</div>
-            <div id="compresor-entrada">-- ºC</div>
-            <div id="compresor-salida">-- ºC</div>
-            <div id="condensador-entrada">-- ºC</div>
-            <div id="condensador-salida">-- ºC</div>
+        <section id="outdoor">
+            <p>EXTERIOR</p>
             <div id="temperatura-ambiente">-- ºC</div>
-            <div id="temperatura-camara">-- ºC</div>
+            <section id="fridge">
+                <img src="/static/esquema.webp" alt="" width="400" height="300">
+                <div id="evaporador-entrada">-- ºC</div>
+                <div id="evaporador-salida">-- ºC</div>
+                <div id="compresor-entrada">-- ºC</div>
+                <div id="compresor-salida">-- ºC</div>
+                <div id="condensador-entrada">-- ºC</div>
+                <div id="condensador-salida">-- ºC</div>
+                <div id="temperatura-camara">-- ºC</div>
+            </section>
         </section>
     </section>
 
