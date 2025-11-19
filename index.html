@@ -5,89 +5,154 @@
     <meta charset="utf-8">
     <title>Ciclo frigorífico - temperaturas</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: grey;
-            height: 100dvh;
+        h1 {
+            text-transform: capitalize;
+
         }
 
+        body {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+
+        header,
+        footer {
+            background-color: oklch(54.6% 0.245 262.881);
+            color: white;
+            width: 100%;
+            padding-inline: 1rem;
+        }
+
+        header {
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid oklch(54.6% 0.245 262.881);
+
+            & h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        footer {
+            font-size: small;
+            text-align: center;
+            padding-block: 0;
+        }
+
+
+
+
         #app {
-            background-color: white;
+            background: white;
             padding: 20px;
         }
 
         #fridge {
-            width: 400px;
-            height: 300px;
+            width: 700px;
+            height: 600px;
             position: relative;
             border: 1px solid;
+            text-align: center;
+        }
+
+        .sensor {
+            font-size: 26px;
+            position: absolute;
+            cursor: pointer;
         }
 
         #evaporador-salida {
             position: absolute;
-            top: 16%;
-            right: 28%;
+            top: 85%;
+            right: 20%;
             font-size: 26px;
-            color: blue;
+            color: purple;
+            cursor: pointer;
         }
 
         #evaporador-entrada {
             position: absolute;
-            top: 16%;
+            top: 85%;
             left: 20%;
             font-size: 26px;
             color: blue;
+            cursor: pointer;
         }
 
         #compresor-entrada {
             position: absolute;
-            top: 30%;
-            right: 15%;
+            top: 65%;
+            right: 10%;
             font-size: 26px;
-            color: blue;
+            color: rgb(0, 255, 64);
+            cursor: pointer;
         }
 
         #compresor-salida {
             position: absolute;
-            top: 60%;
-            left: 70%;
+            top: 35%;
+            right: 10%;
             font-size: 26px;
             color: red;
+            cursor: pointer;
         }
 
         #condensador-entrada {
             position: absolute;
-            top: 80%;
+            top: 15%;
             right: 25%;
             font-size: 26px;
-            color: red;
+            color: rgb(255, 174, 0);
+            cursor: pointer;
         }
 
         #condensador-salida {
             position: absolute;
-            top: 80%;
-            left: 20%;
+            top: 15%;
+            left: 25%;
             font-size: 26px;
             color: red;
+            cursor: pointer;
         }
 
         #temperatura-camara {
             position: absolute;
-            top: 48%;
-            left: 38%;
+            top: 40%;
+            left: 45%;
             font-size: 26px;
-            color: green;
+            color: yellowgreen;
+            cursor: pointer;
+        }
+
+        #sensor-alta {
+            top: 25%;
+            right: 0%;
+            font-size: 22px;
+            color: darkred;
+            cursor: pointer;
+        }
+
+        #sensor-baja {
+            top: 70%;
+            right: 0%;
+            font-size: 22px;
+            color: darkblue;
+            cursor: pointer;
         }
 
         #temperatura-ambiente {
-            color: green;
+            cursor: pointer;
+            color: aqua;
         }
 
         #outdoor {
+            display: grid;
+            justify-items: center;
+            position: relative;
             border: 1px solid;
             padding: 0.5rem 2rem;
 
@@ -98,29 +163,69 @@
                 font-size: 26px;
             }
         }
+
+        .hidden {
+            display: none;
+        }
+
+        #compresor {
+            position: absolute;
+            top: 51%;
+            left: 55%;
+            width: 110px;
+            height: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        #main {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <h1>monitor frigorífico</h1>
+        <img src="/static/logo-ies-pou-clar.png" alt="">
+    </header>
     <section id="app">
-        <h2>Ciclo frigorífico — temperaturas</h2>
-        <p>Actualiza cada 2 segundos.</p>
-        <section id="outdoor">
-            <p>EXTERIOR</p>
-            <div id="temperatura-ambiente">-- ºC</div>
-            <section id="fridge">
-                <img src="/static/esquema.webp" alt="" width="400" height="300">
-                <div id="evaporador-entrada">-- ºC</div>
-                <div id="evaporador-salida">-- ºC</div>
-                <div id="compresor-entrada">-- ºC</div>
-                <div id="compresor-salida">-- ºC</div>
-                <div id="condensador-entrada">-- ºC</div>
-                <div id="condensador-salida">-- ºC</div>
-                <div id="temperatura-camara">-- ºC</div>
-            </section>
-        </section>
-    </section>
+        <h2>Ciclo Frigorífico — Temperaturas & Presiones</h2>
+        <div id="main">
+            <section id="outdoor">
+                <p>EXTERIOR</p>
+                <div id="temperatura-ambiente">-- ºC</div>
+                <section id="fridge">
+                    <img src="/static/Froztec-Cicloderefrigeracion.webp" width="600" height="600">
+                    <div id="evaporador-entrada" class="sensor" onclick="showinfo('evaporador-entrada')">-- ºC</div>
 
+                    <div id="evaporador-salida" class="sensor" onclick="showinfo('evaporador-salida')">-- ºC</div>
+
+                    <div id="compresor-entrada" class="sensor" onclick="showinfo('compresor-entrada')">-- ºC</div>
+
+                    <div id="compresor-salida" class="sensor" onclick="showinfo('compresor-salida')">-- ºC</div>
+
+                    <div id="condensador-entrada" class="sensor" onclick="showinfo('condensador-entrada')">-- ºC</div>
+
+                    <div id="condensador-salida" class="sensor" onclick="showinfo('condensador-salida')">-- ºC</div>
+
+                    <div id="sensor-alta" class="sensor" onclick="showinfo('sensor-alta')">-- bar</div>
+
+                    <div id="sensor-baja" class="sensor" onclick="showinfo('sensor-baja')">-- bar</div>
+
+                    <div id="temperatura-camara" class="sensor">-- ºC</div>
+                    <button id="compresor" onclick="showinfo('compresor')"></button>
+                </section>
+            </section>
+            <section id="show-info"></section>
+        </div>
+    </section>
+    <footer>
+        <p>Creado por Toni</p>
+    </footer>
     <script>
         async function updateTemps() {
             try {
@@ -140,6 +245,65 @@
         }
         setInterval(updateTemps, 2000);
         updateTemps();
+
+        const diccionario = {
+            "evaporador-entrada": {
+                titulo: "Evaporador entrada",
+                info: "Información sobre el evaporador de entrda",
+                imgUrl: "/static/logo-ies-pou-clar.png",
+            },
+            "evaporador-salida": {
+                titulo: "Evaporador salida",
+                info: "Información sobre el evaporador de salida",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "compresor-entrada": {
+                titulo: "Compresor entrada",
+                info: "Información sobre el compresor de entrda",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "compresor-salida": {
+                titulo: "Compresor salida",
+                info: "Información sobre el compresor de salida",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "condensador-entrada": {
+                titulo: "Condesador entrada",
+                info: "Información sobre el condensador de entrda",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "condensador-salida": {
+                titulo: "condensador salida",
+                info: "Información sobre el condensador de salida",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "sensor-alta": {
+                titulo: "sensor alta",
+                info: "Información sobre el sensor de alta",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "sensor-baja": {
+                titulo: "sensor baja",
+                info: "Información sobre el sensor de baja",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            },
+            "compresor": {
+                titulo: "compresor",
+                info: "Información sobre el compresor",
+                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            }
+        }
+
+        function showinfo(element) {
+            const infoPanel = document.getElementById('show-info');
+            const infoElement = diccionario[element];
+            console.log(infoElement.titulo);
+            infoPanel.innerHTML = `
+                <h1>${infoElement.titulo}</h1>
+                <p>${infoElement.info}</p>
+                ${infoElement.imgUrl ? `<img src="${infoElement.imgUrl}" width="200px" height="100px"/>` : ``}
+            `
+        }
     </script>
 </body>
 
