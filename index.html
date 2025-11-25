@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ciclo frigorífico - temperaturas</title>
+    <title>Ciclo frigorífico</title>
     <style>
         h1 {
             text-transform: capitalize;
@@ -23,7 +23,6 @@
             background-color: oklch(54.6% 0.245 262.881);
             color: white;
             width: 100%;
-            padding-inline: 1rem;
         }
 
         header {
@@ -34,6 +33,7 @@
 
             & h1 {
                 font-size: 2.2rem;
+                margin-left: 20px;
             }
         }
 
@@ -48,12 +48,15 @@
 
         #app {
             background: white;
-            padding: 20px;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+
         }
 
         #fridge {
-            width: 700px;
-            height: 600px;
+            width: 400px;
+            height: 400px;
             position: relative;
             border: 1px solid;
             text-align: center;
@@ -68,9 +71,9 @@
         #evaporador-salida {
             position: absolute;
             top: 85%;
-            right: 20%;
-            font-size: 26px;
-            color: purple;
+            right: 15%;
+            font-size: 16px;
+            color: blue;
             cursor: pointer;
         }
 
@@ -78,7 +81,7 @@
             position: absolute;
             top: 85%;
             left: 20%;
-            font-size: 26px;
+            font-size: 16px;
             color: blue;
             cursor: pointer;
         }
@@ -86,17 +89,17 @@
         #compresor-entrada {
             position: absolute;
             top: 65%;
-            right: 10%;
-            font-size: 26px;
-            color: rgb(0, 255, 64);
+            right: 0%;
+            font-size: 16px;
+            color: blue;
             cursor: pointer;
         }
 
         #compresor-salida {
             position: absolute;
-            top: 35%;
-            right: 10%;
-            font-size: 26px;
+            top: 34%;
+            right: 0%;
+            font-size: 16px;
             color: red;
             cursor: pointer;
         }
@@ -104,30 +107,31 @@
         #condensador-entrada {
             position: absolute;
             top: 15%;
-            right: 25%;
-            font-size: 26px;
-            color: rgb(255, 174, 0);
+            right: 15%;
+            font-size: 16px;
+            color: red;
             cursor: pointer;
         }
 
         #condensador-salida {
             position: absolute;
             top: 15%;
-            left: 25%;
-            font-size: 26px;
+            left: 20%;
+            font-size: 16px;
             color: red;
             cursor: pointer;
         }
 
         #temperatura-camara {
             position: absolute;
-            top: 40%;
+            top: 42%;
             left: 45%;
-            font-size: 26px;
+            font-size: 16px;
             color: yellowgreen;
             cursor: pointer;
         }
 
+        /* 
         #sensor-alta {
             top: 25%;
             right: 0%;
@@ -141,26 +145,26 @@
             right: 0%;
             font-size: 22px;
             color: darkblue;
-            cursor: pointer;
-        }
+            cursor: pointer; */
+        /* } */
 
         #temperatura-ambiente {
             cursor: pointer;
-            color: aqua;
+            color: green;
         }
 
         #outdoor {
             display: grid;
-            justify-items: center;
+            place-items: center;
             position: relative;
             border: 1px solid;
-            padding: 0.5rem 2rem;
+            padding: 0.5rem;
 
             & p,
             #temperatura-ambiente {
                 text-align: center;
                 font-weight: 700;
-                font-size: 26px;
+                font-size: 20px;
             }
         }
 
@@ -180,26 +184,87 @@
 
         }
 
+        #condensador {
+            position: absolute;
+            top: 36%;
+            left: 32%;
+            width: 140px;
+            height: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        #valvula-de-expansion {
+            position: absolute;
+            top: 49%;
+            left: 20%;
+            width: 140px;
+            height: 35px;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+        }
+
+        #evaporador {
+            position: absolute;
+            top: 60%;
+            left: 32%;
+            width: 140px;
+            height: 35px;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+        }
+
         #main {
             display: flex;
-            justify-content: center;
+            justify-content: left;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #show-info {
+            text-wrap: wrap;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        #pegatina {
+            background-color: white;
+            width: 100px;
+            height: 20px;
+            position: absolute;
+            top: 92%;
+            right: 5%;
+
         }
     </style>
 </head>
 
 <body>
     <header>
+
         <h1>monitor frigorífico</h1>
         <img src="/static/logo-ies-pou-clar.png" alt="">
     </header>
     <section id="app">
-        <h2>Ciclo Frigorífico — Temperaturas & Presiones</h2>
+        <!-- <h2>Ciclo Frigorífico — Temperaturas</h2> -->
+
+        <!-- <p>Actualiza cada 2 segundos.</p>
+<div>Presión baja (entrada compresor): <span id="sensor-baja">-- bar</span></div>
+<div>Presión alta (salida compresor): <span id="sensor-alta">-- bar</span></div>
+<br> -->
         <div id="main">
             <section id="outdoor">
                 <p>EXTERIOR</p>
                 <div id="temperatura-ambiente">-- ºC</div>
                 <section id="fridge">
-                    <img src="/static/Froztec-Cicloderefrigeracion.webp" width="600" height="600">
+                    <img src="/static/Froztec-Cicloderefrigeracion.webp" width="400" height="400">
                     <div id="evaporador-entrada" class="sensor" onclick="showinfo('evaporador-entrada')">-- ºC</div>
 
                     <div id="evaporador-salida" class="sensor" onclick="showinfo('evaporador-salida')">-- ºC</div>
@@ -211,51 +276,54 @@
                     <div id="condensador-entrada" class="sensor" onclick="showinfo('condensador-entrada')">-- ºC</div>
 
                     <div id="condensador-salida" class="sensor" onclick="showinfo('condensador-salida')">-- ºC</div>
+                    <div id="pegatina"></div>
 
-                    <div id="sensor-alta" class="sensor" onclick="showinfo('sensor-alta')">-- bar</div>
+                    <!-- <div id="sensor-alta" class="sensor" onclick="showinfo('sensor-alta')">-- bar</div>
 
-                    <div id="sensor-baja" class="sensor" onclick="showinfo('sensor-baja')">-- bar</div>
+                <div id="sensor-baja" class="sensor" onclick="showinfo('sensor-baja')">-- bar</div> -->
 
                     <div id="temperatura-camara" class="sensor">-- ºC</div>
                     <button id="compresor" onclick="showinfo('compresor')"></button>
+                    <button id="condensador" onclick="showinfo('condensador')"></button>
+                    <button id="valvula-de-expansion" onclick="showinfo('valvula-de-expansion')"></button>
+                    <button id="evaporador" onclick="showinfo('evaporador')"></button>
                 </section>
             </section>
             <section id="show-info"></section>
         </div>
+
     </section>
-    <footer>
-        <p>Creado por Toni</p>
-    </footer>
+
     <script>
         async function updateTemps() {
             try {
                 const res = await fetch('/temps');
                 const data = await res.json();
-                // para cada clave -> actualiza el text cuyo id sea esa clave
+
                 for (const key in data) {
                     const el = document.getElementById(key);
                     if (el) {
-                        const t = data[key] === null ? '--' : (data[key].toFixed(2) + ' °C');
+                        const t = data[key] === null ? '--' : (data[key].toFixed(2) + ' ºC');
                         el.textContent = t;
                     }
                 }
             } catch (e) {
-                console.error('fetch error', e);
+                console.error('Error:', e);
             }
         }
-        setInterval(updateTemps, 2000);
+        setInterval(updateTemps, 1000);
         updateTemps();
 
         const diccionario = {
             "evaporador-entrada": {
-                titulo: "Evaporador entrada",
-                info: "Información sobre el evaporador de entrda",
-                imgUrl: "/static/logo-ies-pou-clar.png",
+                titulo: "Entrada Evaporador",
+                info: "",
+                imgUrl: "/static/Entrada evaporador.png",
             },
             "evaporador-salida": {
-                titulo: "Evaporador salida",
-                info: "Información sobre el evaporador de salida",
-                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+                titulo: "Salida Evaporador",
+                info: "",
+                imgUrl: "/static/salida-evaporador.png"
             },
             "compresor-entrada": {
                 titulo: "Compresor entrada",
@@ -277,34 +345,58 @@
                 info: "Información sobre el condensador de salida",
                 imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
             },
-            "sensor-alta": {
-                titulo: "sensor alta",
-                info: "Información sobre el sensor de alta",
-                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
-            },
-            "sensor-baja": {
-                titulo: "sensor baja",
-                info: "Información sobre el sensor de baja",
-                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
-            },
+
             "compresor": {
                 titulo: "compresor",
-                info: "Información sobre el compresor",
-                imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
-            }
+                info: "",
+                imgUrl: "/static/Compresores.png"
+            },
+            "condensador": {
+                titulo: "condensador",
+                info: "",
+                imgUrl: "/static/Condensador.png"
+            },
+            "valvula-de-expansion": {
+                titulo: "Válvula de expansión",
+                info: "",
+                imgUrl: "/static/Valvula-expansion.png"
+            },
+            "evaporador": {
+                titulo: "evaporador",
+                info: ``,
+                imgUrl: "/static/Evaporador.png"
+            },
+            // "sensor-alta": {
+            //     titulo: "sensor alta",
+            //     info: "Información sobre el sensor de alta",
+            //     imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            // },
+            // "sensor-baja": {
+            //     titulo: "sensor baja",
+            //     info: "Información sobre el sensor de baja",
+            //     imgUrl: "https://frigoristas.files.wordpress.com/2016/06/condensador-aire-21.jpg"
+            // },
         }
 
         function showinfo(element) {
             const infoPanel = document.getElementById('show-info');
             const infoElement = diccionario[element];
             console.log(infoElement.titulo);
+            // infoPanel.innerHTML = `
+            //     <h1>${infoElement.titulo}</h1>
+            //     <p id='show-info-text'>${infoElement.info}</p>
+            //     ${infoElement.imgUrl ? `<img src="${infoElement.imgUrl}" />` : ``}
+            // `
             infoPanel.innerHTML = `
                 <h1>${infoElement.titulo}</h1>
-                <p>${infoElement.info}</p>
-                ${infoElement.imgUrl ? `<img src="${infoElement.imgUrl}" width="200px" height="100px"/>` : ``}
+                ${infoElement.imgUrl ? `<img src="${infoElement.imgUrl}" />` : ``}
             `
         }
     </script>
+
+    <footer>
+        <p>Creado por CHANG JUN FU LIN</p>
+    </footer>
 </body>
 
 </html>
